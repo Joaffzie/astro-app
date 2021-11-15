@@ -16,9 +16,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'docker run -d --name astro-app -p 5000:5000 astro-app'
+                sh 'docker-compose up -d'
                 sh 'sleep 5'
-                sh 'curl astro-app:5000'
+                sh 'curl app:5000'
             }
         }
         stage('Publish') {
