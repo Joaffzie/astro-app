@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'docker build -t astro-app -f Dockerfile .'
+                sh 'docker build -t astro-app .'
             }
         }
 
