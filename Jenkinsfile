@@ -30,6 +30,9 @@ pipeline {
 
         stage('Build') {
             steps {
+                when {
+                    expression {env.GIT_BRANCH ==~ /dev\/.*/}
+                }
                 echo 'Building...'
                 // sh 'docker build -t astro-app ./app'
             }
