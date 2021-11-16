@@ -12,16 +12,18 @@ pipeline {
 
     stages {
         stage('Versioning') {
-            script {
-                lasttag = sh(script: "git tag -l --sort=version:refname \"${params.VERSION}.*\" | tail -1", returnStdout: true).trim()
-                if (lasttag.isEmpty()) {
-                    newtag = "${params.VERSION}.0"
-                    TAG = sh(script: "echo ${newtag}", returnStdout: true)
-                } else {
-                    newtag = lasttag.split('\\.')
-                    newtag[2] = newtag[2].toInteger() + 1
-                    newtag = newtag.join('.')
-                    TAG = sh(script: "echo ${newtag}, returnStdout: true")
+            steps {
+                script {
+                    lasttag = sh(script: "git tag -l --sort=version:refname \"${params.VERSION}.*\" | tail -1", returnStdout: true).trim()
+                    if (lasttag.isEmpty()) {
+                        newtag = "${params.VERSION}.0"
+                        TAG = sh(script: "echo ${newtag}", returnStdout: true)
+                    } else {
+                        newtag = lasttag.split('\\.')
+                        newtag[2] = newtag[2].toInteger() + 1
+                        newtag = newtag.join('.')
+                        TAG = sh(script: "echo ${newtag}, returnStdout: true")
+                    }
                 }
             }
         }
