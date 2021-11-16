@@ -49,7 +49,7 @@ pipeline {
                 echo "${TAG}"
                 sh "docker tag astro-app eu.gcr.io/astro-app-332210/astro-app:${TAG}"
                 withDockerRegistry(credentialsId: 'gcr:astro-app', url: 'https://eu.gcr.io') {
-                    sh 'docker push eu.gcr.io/astro-app-332210/astro-app'
+                    sh "docker push eu.gcr.io/astro-app-332210/astro-app:${TAG}"
                 }
                 sh "git tag ${TAG}"
 
