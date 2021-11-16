@@ -24,8 +24,11 @@ pipeline {
         stage('Publish') {
             steps {
                 echo 'Publishing...'
+                echo "${BRANCH}"
+                withDockerRegistry(credentialsId: 'gcr:astro-app', url: 'https://eu.gcr.io') {
+                    
+                }
             }
-
         }
     }    
 }
