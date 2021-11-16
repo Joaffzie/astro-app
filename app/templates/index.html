@@ -63,14 +63,14 @@
                         </button>
                     </div>
                 </form>
-				<p id='astro-text'></p>
+				<p id='astro-text'> hello </p>
             </div>
         </div>
         <script>
             let form = document.querySelector('#form');
             form.addEventListener('submit', function () {
 				let astro = document.querySelector('#astro-text');
-				fetch('http://localhost/name')
+				fetch('http://localhost')
 					.then(response => response.json())
 					.then(data => console.log(data));
             });
