@@ -70,7 +70,7 @@
             let form = document.querySelector('#form');
             form.addEventListener('submit', function () {
 				let astro = document.querySelector('#astro-text');
-				fetch('http://localhost')
+				fetch('http://localhost/name')
 					.then(response => response.json())
 					.then(data => console.log(data));
             });
