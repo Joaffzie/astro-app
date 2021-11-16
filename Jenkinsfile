@@ -1,3 +1,4 @@
+def TAG
 pipeline {
     agent any
 
@@ -10,6 +11,21 @@ pipeline {
     }
 
     stages {
+        stage('Versioning') {
+            script {
+                lasttag = sh(script: "git tag -l --sort=version:refname \"${params.VERSION}.*\" | tail -1", returnStdout: true).trim()
+                if (lasttag.isEmpty()) {
+                    newtag = "${params.VERSION}.0"
+                    TAG = sh(script: "echo ${newtag}", returnStdout: true)
+                } else {
+                    newtag = lasttag.split('\\.')
+                    newtag[2] = newtag[2].toInteger() + 1
+                    newtag = newtag.join('.')
+                    TAG = sh(script: "echo ${newtag}, returnStdout: true")
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Building...'
@@ -28,7 +44,8 @@ pipeline {
         stage('Publish') {
             steps {
                 echo 'Publishing...'
-                sh "docker tag astro-app eu.gcr.io/astro-app-332210/astro-app"
+                echo "${TAG}"
+                sh "docker tag astro-app eu.gcr.io/astro-app-332210/astro-app:${TAG}"
                 withDockerRegistry(credentialsId: 'gcr:astro-app', url: 'https://eu.gcr.io') {
                     sh 'docker push eu.gcr.io/astro-app-332210/astro-app'
                 }
