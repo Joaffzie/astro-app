@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    checkout scm
 
     environment {
         BRANCH = "${env.GIT_BRANCH}"
@@ -24,11 +25,16 @@ pipeline {
         stage('Publish') {
             steps {
                 echo 'Publishing...'
-                echo "${BRANCH}"
+                sh "docker tag astro-app eu.gcr.io/astro-app-332210/astro-app"
                 withDockerRegistry(credentialsId: 'gcr:astro-app', url: 'https://eu.gcr.io') {
-                    
+                    sh 'docker push eu.gcr.io/astro-app-332210/astro-app'
                 }
             }
         }
     }    
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
