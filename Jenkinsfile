@@ -51,6 +51,8 @@ pipeline {
                 withDockerRegistry(credentialsId: 'gcr:astro-app', url: 'https://eu.gcr.io') {
                     sh 'docker push eu.gcr.io/astro-app-332210/astro-app'
                 }
+                sh "git tag ${TAG}"
+
             }
         }
     }    
