@@ -68,12 +68,15 @@
         </div>
         <script>
             let form = document.querySelector('#form');
-            form.addEventListener('submit', function () {
+			// console.log(form);
+            form.addEventListener('submit', function (event) {
+				let fName = document.getElementById('name').value;
+				console.log(fName);
 				let astro = document.querySelector('#astro-text');
-				fetch('http://localhost')
-					.then(response => response.json())
-					.then(data => console.log(data));
-				astro.innerHTML = 'hello world'
+				fetch('http://localhost/month')
+				.then(response => response.json())
+				.then(data => console.log(data));
+				event.preventDefault()
             });
         </script>
     </body>

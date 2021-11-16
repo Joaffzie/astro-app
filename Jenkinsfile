@@ -16,9 +16,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'docker-compose up -d'
-                sh 'sleep 5'
-                sh 'curl app:5000'
+                // sh 'docker-compose up -d'
+                // sh 'sleep 5'
+                // sh 'curl app:5000'
             }
         }
         stage('Publish') {

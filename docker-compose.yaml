@@ -8,8 +8,11 @@ services:
       - backend
     environment:
       - MONGODB_ROOT_PASSWORD=password
+      - MONGODB_DATABASE=db
     volumes:
       - db-data:/bitnami/mongodb
+    ports:
+      - 27017:27017
   
   app:
     image: astro-app
