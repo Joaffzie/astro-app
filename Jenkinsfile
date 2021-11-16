@@ -5,6 +5,10 @@ pipeline {
         BRANCH = "${env.GIT_BRANCH}"
     }
 
+    parameters {
+        string(name: 'VERSION', defaultValue: 'None')
+    }
+
     stages {
         stage('Build') {
             steps {
