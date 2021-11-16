@@ -29,12 +29,13 @@ pipeline {
         }
 
         stage('Build') {
-            when {
-                expression {env.GIT_BRANCH ==~ /dev\/.*/}
-            }
             steps {
-                echo 'Building...'
-                // sh 'docker build -t astro-app ./app'
+                script{
+                    if (BRANCH.matches('dev')) {
+                        echo 'Building...'
+                        // sh 'docker build -t astro-app ./app'
+                    }
+                }
             }
         }
 
@@ -55,7 +56,6 @@ pipeline {
                     sh "docker push eu.gcr.io/astro-app-332210/astro-app:${TAG}"
                 }
                 sh "git tag ${TAG}"
-
             }
         }
     }    
