@@ -7,7 +7,7 @@ pipeline {
     }
 
     parameters {
-        string(name: 'VERSION', defaultValue: 'None')
+        string(name: 'VERSION', defaultValue: '1.0')
     }
 
     stages {
@@ -29,10 +29,10 @@ pipeline {
         }
 
         stage('Build') {
+            when {
+                expression {env.GIT_BRANCH ==~ /dev\/.*/}
+            }
             steps {
-                when {
-                    expression {env.GIT_BRANCH ==~ /dev\/.*/}
-                }
                 echo 'Building...'
                 // sh 'docker build -t astro-app ./app'
             }
