@@ -2,7 +2,7 @@ version: '2'
 
 services:
   mongo:
-    image: bitnami/mongodb:4.0
+    image: bitnami/mongodb:3.6
     container_name: mongo
     networks:
       - backend

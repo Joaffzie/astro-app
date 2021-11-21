@@ -4,7 +4,7 @@ from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 
-mongodb_client = PyMongo(app, uri="mongodb://root:password@mongo:27017/db?authSource=admin")
+mongodb_client = PyMongo(app, uri="mongodb://root:password@mongo-svc.astro-app.svc.cluster.local:27017/db?authSource=admin")
 
 db = mongodb_client.db
 

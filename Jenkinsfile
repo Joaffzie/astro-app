@@ -33,7 +33,7 @@ pipeline {
                 script{
                     if (BRANCH.matches('dev')) {
                         echo 'Building...'
-                        // sh 'docker build -t astro-app ./app'
+                        sh 'docker build -t astro-app ./app'
                     }
                 }
             }
