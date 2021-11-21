@@ -3,8 +3,8 @@ WORKDIR /app
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 COPY requirements.txt .
-COPY app.py .
 RUN pip install -r requirements.txt
+COPY app.py .
 
 FROM python:alpine3.14
 COPY --from=build-stage opt/venv opt/venv
